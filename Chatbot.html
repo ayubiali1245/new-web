@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbots</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-image: url('https://i.ebayimg.com/images/g/n8IAAOSwltRkNCSF/s-l1200.png');
+            background-size: cover;
+            background-position: center;
+        }
+        header {
+            background: #007bff;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: #007bff;
+            color: #ffffff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        #chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        #chatbot-header {
+            background: #007bff;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        #chatbot-messages {
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        #chatbot-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        #chatbot-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+        #chatbot-input button {
+            padding: 10px;
+            background: #007bff;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+        .message {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .message img {
+            width: 30px; /* Adjust size as needed */
+            height: 30px; /* Adjust size as needed */
+            border-radius: 50%; /* Makes the image round */
+            margin-right: 10px; /* Spacing between image and text */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Benefits of Using Chatbots</h1>
+</header>
+
+<section>
+    <h2>1. 24/7 Availability</h2>
+    <p>Chatbots can provide support and information to users at any time, day or night, ensuring that help is always available.</p>
+</section>
+
+<section>
+    <h2>2. Cost Efficiency</h2>
+    <p>By automating customer service and other repetitive tasks, businesses can reduce operational costs and free up human agents for more complex inquiries.</p>
+</section>
+
+<section>
+    <h2>3. Quick Response Times</h2>
+    <p>Chatbots can respond to user queries instantly, significantly reducing wait times and enhancing the overall user experience.</p>
+</section>
+
+<section>
+    <h2>4. Improved Customer Engagement</h2>
+    <p>Chatbots can engage users through personalized interactions, guiding them to the information or products they need, which increases satisfaction and retention.</p>
+</section>
+
+<section>
+    <h2>5. Data Collection and Insights</h2>
+    <p>Chatbots can gather valuable data about user preferences and behaviors, helping businesses make informed decisions and improve their services.</p>
+</section>
+
+<header>
+    <h1>Chatbot</h1>
+</header>
+
+<section>
+    <h2>This Is a Chatbot Made By Us</h2>
+    <p>This Text to Speech Chatbot Can Tell you stories, essays, and answer some questions. It can calculate any math problem.</p>
+</section>
+
+<footer>
+    <p>&copy; 2024 Chatbot By Ayub and Abdullah</p>
+</footer>
+
+<!-- Chatbot HTML -->
+<div id="chatbot">
+    <div id="chatbot-header" onclick="toggleChatbot()">Chat with us!</div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input">
+        <input type="text" id="user-input" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    // Chatbot toggle
+    function toggleChatbot() {
+        var chatbot = document.getElementById("chatbot");
+        chatbot.classList.toggle("closed");
+    }
+
+    // Handle 'Enter' key press
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    }
+
+    // Send a message and log the user input
+    function sendMessage() {
+        var userMessage = document.getElementById("user-input").value;
+        if (!userMessage) return;
+
+        displayMessage("User", userMessage, "https://th.bing.com/th?q=User+Profile+Scratcha6969&w=120&h=120&c=1&rs=1&qlt=90&cb=1&pid=InlineBlock&mkt=en-XA&cc=OM&setlang=en&adlt=strict&t=1&mw=247");
+        document.getElementById("user-input").value = "";
+
+        var botResponse = getBotResponse(userMessage);
+        setTimeout(() => {
+            displayMessage("Bot", botResponse, "https://th.bing.com/th/id/OIP.nURkWURpGxW7PqroM0dyNgHaJ4?w=137&h=184&c=7&r=0&o=5&pid=1.7");
+            speakText(botResponse); // Trigger TTS for bot response
+        }, 1000);
+    }
+
+    // Display a message
+    function displayMessage(sender, message, imgUrl) {
+        var messagesDiv = document.getElementById("chatbot-messages");
+        var messageDiv = document.createElement("div");
+        messageDiv.className = "message";
+        messageDiv.innerHTML = `<img src="${imgUrl}" alt="${sender} profile picture">${sender}: ${message}`;
+        messagesDiv.appendChild(messageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    // Basic bot response function
+    function getBotResponse(message) {
+        message = message.toLowerCase();
+        if (message.includes("hello") || message.includes("hi") || message.includes("hey")) return "Hello! How can I assist you today?";
+        if (message.includes("calculate")) return "I can help with basic calculations. Just type the problem!";
+        if (message.includes("story")) return generateStory(message);
+        if (message.includes("essay")) return generateEssay(message);
+        if (message.includes("square root of")) return calculateSquareRoot(message);
+        if (message.includes("joke")) return tellJoke();
+        if (message.includes("what is your name")) return "I go by the name Chatbot!";
+        if (message.includes("how are you")) return "I am fine, what about you?";
+        if (message.includes("what can you do")) return "I can tell you stories, essays, jokes and calculation.";
+        if (message.includes("fine")) return "I am glad to hear that! What's on your mind today?";
+        if (message.includes("bye")) return "See you later! If you need anything else, feel free to ask.";
+        if (message.includes("benefits of chatbots")) return "Chatbots offer numerous benefits, including 24/7 availability, cost-effectiveness, and quick response times, allowing businesses to provide instant support and enhance customer satisfaction. They can handle multiple inquiries simultaneously, ensuring consistent responses while gathering valuable data for analysis. By personalizing interactions and integrating with various services, chatbots improve user engagement and streamline operations. Additionally, they reduce human error and can be utilized in education for instant feedback, making them versatile tools for enhancing user experience across multiple domains.";
+        if (message.includes("favorite colour")) return "I don’t have personal preferences, but I think colors like blue and green are often popular choices! Do you have a favorite color?";
+        if (message.includes("creator")) return "I owe my existence to Ayub and Abdullah from 8-N";
+        if (message.includes("photosynthesis")) return "Photosynthesis is a biochemical process used by plants, algae, and some bacteria to convert light energy into chemical energy stored in glucose (sugar). This process is vital for life on Earth, as it provides the oxygen we breathe and is the foundation of the food chain.";
+        if (message.includes("thank you") || message.includes("thanks")) return "You're most welcome.";
+        if (message.includes("name")) return "My name is Chatbot";
+        if (message.includes("who are you")) return "I am Chatbot";         
+        return evaluateMath(message) || "I'm here to help! Please ask a question.";
+    }
+
+    // Function to evaluate math expressions
+    function evaluateMath(message) {
+        try {
+            const expression = message.replace(/[^-()\d/*+.]/g, ''); // Only allow certain characters
+            const result = eval(expression);
+            return `The answer is ${result}`;
+        } catch (error) {
+            return null; // Return null if an error occurs
+        }
+    }
+
+    // Function to generate a story
+    function generateStory(message) {
+        const topic = message.split("story on ")[1] || "a random adventure";
+        return `Once upon a time, in a land filled with magic and wonder, there was a brave hero named Alex. One day, Alex set out on a quest to discover the secrets of ${topic}. Along the journey, Alex encountered mythical creatures, solved ancient riddles, and made friends with a wise old wizard. Through trials and tribulations, Alex learned the value of courage and friendship, ultimately returning home with not just stories, but a heart full of wisdom and adventure. The end!`;
+    }
+
+    // Function to generate an essay
+    function generateEssay(message) {
+        const topic = message.split("essay on ")[1] || "the importance of learning";
+        return `An essay on ${topic} would highlight the crucial role that education plays in personal and societal development. Learning equips individuals with knowledge and skills essential for navigating the complexities of life. It fosters critical thinking, creativity, and the ability to adapt to changing circumstances. In today’s fast-paced world, continuous learning is necessary for professional success and personal growth. Moreover, education promotes understanding and tolerance among diverse cultures, making it foundational for peace and cooperation in society. Thus, investing in education is vital for building a prosperous future for all.`;
+    }
+
+    // Function to calculate square root
+    function calculateSquareRoot(message) {
+        const number = parseFloat(message.split("square root of ")[1]);
+        if (isNaN(number)) return "Please provide a valid number.";
+        const squareRoot = Math.sqrt(number);
+        return `The square root of ${number} is ${squareRoot}.`;
+    }
+
+    // Function to tell a joke
+    function tellJoke() {
+        return "Why don't scientists trust atoms? Because they make up everything!";
+        
+    }
+
+    // Function for text-to-speech
+    function speakText(text) {
+        var msg = new SpeechSynthesisUtterance(text);
+        window.speechSynthesis.speak(msg);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbots</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-image: url('https://i.ebayimg.com/images/g/n8IAAOSwltRkNCSF/s-l1200.png');
+            background-size: cover;
+            background-position: center;
+        }
+        header {
+            background: #007bff;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: #007bff;
+            color: #ffffff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        #chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        #chatbot-header {
+            background: #007bff;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        #chatbot-messages {
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        #chatbot-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        #chatbot-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+        #chatbot-input button {
+            padding: 10px;
+            background: #007bff;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+        .message {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .message img {
+            width: 30px; /* Adjust size as needed */
+            height: 30px; /* Adjust size as needed */
+            border-radius: 50%; /* Makes the image round */
+            margin-right: 10px; /* Spacing between image and text */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Benefits of Using Chatbots</h1>
+</header>
+
+<section>
+    <h2>1. 24/7 Availability</h2>
+    <p>Chatbots can provide support and information to users at any time, day or night, ensuring that help is always available.</p>
+</section>
+
+<section>
+    <h2>2. Cost Efficiency</h2>
+    <p>By automating customer service and other repetitive tasks, businesses can reduce operational costs and free up human agents for more complex inquiries.</p>
+</section>
+
+<section>
+    <h2>3. Quick Response Times</h2>
+    <p>Chatbots can respond to user queries instantly, significantly reducing wait times and enhancing the overall user experience.</p>
+</section>
+
+<section>
+    <h2>4. Improved Customer Engagement</h2>
+    <p>Chatbots can engage users through personalized interactions, guiding them to the information or products they need, which increases satisfaction and retention.</p>
+</section>
+
+<section>
+    <h2>5. Data Collection and Insights</h2>
+    <p>Chatbots can gather valuable data about user preferences and behaviors, helping businesses make informed decisions and improve their services.</p>
+</section>
+
+<header>
+    <h1>Chatbot</h1>
+</header>
+
+<section>
+    <h2>This Is a Chatbot Made By Us</h2>
+    <p>This Text to Speech Chatbot Can Tell you stories, essays, and answer some questions. It can calculate any math problem.</p>
+</section>
+
+<footer>
+    <p>&copy; 2024 Chatbot By Ayub and Abdullah</p>
+</footer>
+
+<!-- Chatbot HTML -->
+<div id="chatbot">
+    <div id="chatbot-header" onclick="toggleChatbot()">Chat with us!</div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input">
+        <input type="text" id="user-input" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    // Chatbot toggle
+    function toggleChatbot() {
+        var chatbot = document.getElementById("chatbot");
+        chatbot.classList.toggle("closed");
+    }
+
+    // Handle 'Enter' key press
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    }
+
+    // Send a message and log the user input
+    function sendMessage() {
+        var userMessage = document.getElementById("user-input").value;
+        if (!userMessage) return;
+
+        displayMessage("User", userMessage, "https://th.bing.com/th?q=User+Profile+Scratcha6969&w=120&h=120&c=1&rs=1&qlt=90&cb=1&pid=InlineBlock&mkt=en-XA&cc=OM&setlang=en&adlt=strict&t=1&mw=247");
+        document.getElementById("user-input").value = "";
+
+        var botResponse = getBotResponse(userMessage);
+        setTimeout(() => {
+            displayMessage("Bot", botResponse, "https://th.bing.com/th/id/OIP.nURkWURpGxW7PqroM0dyNgHaJ4?w=137&h=184&c=7&r=0&o=5&pid=1.7");
+            speakText(botResponse); // Trigger TTS for bot response
+        }, 1000);
+    }
+
+    // Display a message
+    function displayMessage(sender, message, imgUrl) {
+        var messagesDiv = document.getElementById("chatbot-messages");
+        var messageDiv = document.createElement("div");
+        messageDiv.className = "message";
+        messageDiv.innerHTML = `<img src="${imgUrl}" alt="${sender} profile picture">${sender}: ${message}`;
+        messagesDiv.appendChild(messageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    // Basic bot response function
+    function getBotResponse(message) {
+        message = message.toLowerCase();
+        if (message.includes("hello") || message.includes("hi") || message.includes("hey")) return "Hello! How can I assist you today?";
+        if (message.includes("calculate")) return "I can help with basic calculations. Just type the problem!";
+        if (message.includes("story")) return generateStory(message);
+        if (message.includes("essay")) return generateEssay(message);
+        if (message.includes("time")) return getMuscatTime(message);
+        if (message.includes("square root of")) return calculateSquareRoot(message);
+        if (message.includes("joke")) return tellJoke();
+        if (message.includes("what is your name")) return "I go by the name Syncbot!";
+        if (message.includes("formula of water")) return "The formula for water is H2O.";
+        if (message.includes("you live")) return "I live in the digital world.";
+        if (message.includes("your age")) return "I don't have an age, as I'm a chatbot!";
+        if (message.includes("you sing")) return "Sorry, I am not a singer..";
+        if (message.includes("lol") || message.includes("lmao")) return "What is so funny?";
+        if (message.includes("created")) return "Ayub created me";
+        if (message.includes("what can you do")) return "I can tell you stories, essays, country capitals, jokes, time and math calculation";
+        if (message.includes("how can you help me")) return "I can tell you stories, essays, country capitals, jokes, time and math calculation";
+        if (message.includes("how are you")) return "I am fine, what about you?";
+        if (message.includes("fine")) return "I am glad to hear that! What's on your mind today?";
+        if (message.includes("fun fact")) return "Did you know that honey never spoils? Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3000 years old and still edible!"; 
+        if (message.includes("bye")) return "See you later! If you need anything else, feel free to ask.";
+        if (message.includes("benefits of chatbots")) return "Chatbots offer numerous benefits, including 24/7 availability, cost-effectiveness, and quick response times, allowing businesses to provide instant support and enhance customer satisfaction. They can handle multiple inquiries simultaneously, ensuring consistent responses while gathering valuable data for analysis. By personalizing interactions and integrating with various services, chatbots improve user engagement and streamline operations. Additionally, they reduce human error and can be utilized in education for instant feedback, making them versatile tools for enhancing user experience across multiple domains.";
+        if (message.includes("favorite colour")) return "I don’t have personal preferences, but I think colors like blue and green are often popular choices! Do you have a favorite color?";
+        if (message.includes("creator")) return "I owe my existence to Ayub";
+        if (message.includes("photosynthesis")) return "Photosynthesis is a biochemical process used by plants, algae, and some bacteria to convert light energy into chemical energy stored in glucose (sugar). This process is vital for life on Earth, as it provides the oxygen we breathe and is the foundation of the food chain.";
+        if (message.includes("thank you") || message.includes("thanks")) return "You're most welcome.";
+        if (message.includes("name")) return "My name is Syncbot";
+        if (message.includes("who are you")) return "I am Syncbot";
+            if (message.includes("capital of Afghanistan")) return "Kabul";
+    if (message.includes("capital of Albania")) return "Tirana";
+    if (message.includes("capital of Algeria")) return "Algiers";
+    if (message.includes("capital of Andorra")) return "Andorra la Vella";
+    if (message.includes("capital of Angola")) return "Luanda";
+    if (message.includes("capital of Antigua and Barbuda")) return "St. John's";
+    if (message.includes("capital of Argentina")) return "Buenos Aires";
+    if (message.includes("capital of Armenia")) return "Yerevan";
+    if (message.includes("capital of Australia")) return "Canberra";
+    if (message.includes("capital of Austria")) return "Vienna";
+    if (message.includes("capital of Azerbaijan")) return "Baku";
+    if (message.includes("capital of Bahamas")) return "Nassau";
+    if (message.includes("capital of Bahrain")) return "Manama";
+    if (message.includes("capital of Bangladesh")) return "Dhaka";
+    if (message.includes("capital of Barbados")) return "Bridgetown";
+    if (message.includes("capital of Belarus")) return "Minsk";
+    if (message.includes("capital of Belgium")) return "Brussels";
+    if (message.includes("capital of Belize")) return "Belmopan";
+    if (message.includes("capital of Benin")) return "Porto-Novo";
+    if (message.includes("capital of Bhutan")) return "Thimphu";
+    if (message.includes("capital of Bolivia")) return "Sucre";
+    if (message.includes("capital of Bosnia and Herzegovina")) return "Sarajevo";
+    if (message.includes("capital of Botswana")) return "Gaborone";
+    if (message.includes("capital of Brazil")) return "Brasília";
+    if (message.includes("capital of Brunei")) return "Bandar Seri Begawan";
+    if (message.includes("capital of Bulgaria")) return "Sofia";
+    if (message.includes("capital of Burkina Faso")) return "Ouagadougou";
+    if (message.includes("capital of Burundi")) return "Gitega";
+    if (message.includes("capital of Cabo Verde")) return "Praia";
+    if (message.includes("capital of Cambodia")) return "Phnom Penh";
+    if (message.includes("capital of Cameroon")) return "Yaoundé";
+    if (message.includes("capital of Canada")) return "Ottawa";
+    if (message.includes("capital of Central African Republic")) return "Bangui";
+    if (message.includes("capital of Chad")) return "N'Djamena";
+    if (message.includes("capital of Chile")) return "Santiago";
+    if (message.includes("capital of China")) return "Beijing";
+    if (message.includes("capital of Colombia")) return "Bogotá";
+    if (message.includes("capital of Comoros")) return "Moroni";
+    if (message.includes("capital of Congo, Democratic Republic of the")) return "Kinshasa";
+    if (message.includes("capital of Congo, Republic of the")) return "Brazzaville";
+    if (message.includes("capital of Costa Rica")) return "San José";
+    if (message.includes("capital of Croatia")) return "Zagreb";
+    if (message.includes("capital of Cuba")) return "Havana";
+    if (message.includes("capital of Cyprus")) return "Nicosia";
+    if (message.includes("capital of Czech Republic")) return "Prague";
+    if (message.includes("capital of Denmark")) return "Copenhagen";
+    if (message.includes("capital of Djibouti")) return "Djibouti";
+    if (message.includes("capital of Dominica")) return "Roseau";
+    if (message.includes("capital of Dominican Republic")) return "Santo Domingo";
+    if (message.includes("capital of Ecuador")) return "Quito";
+    if (message.includes("capital of Egypt")) return "Cairo";
+    if (message.includes("capital of El Salvador")) return "San Salvador";
+    if (message.includes("capital of Equatorial Guinea")) return "Malabo";
+    if (message.includes("capital of Eritrea")) return "Asmara";
+    if (message.includes("capital of Estonia")) return "Tallinn";
+    if (message.includes("capital of Eswatini")) return "Mbabane";
+    if (message.includes("capital of Ethiopia")) return "Addis Ababa";
+    if (message.includes("capital of Fiji")) return "Suva";
+    if (message.includes("capital of Finland")) return "Helsinki";
+    if (message.includes("capital of France")) return "Paris";
+    if (message.includes("capital of Gabon")) return "Libreville";
+    if (message.includes("capital of Gambia")) return "Banjul";
+    if (message.includes("capital of Georgia")) return "Tbilisi";
+    if (message.includes("capital of Germany")) return "Berlin";
+    if (message.includes("capital of Ghana")) return "Accra";
+    if (message.includes("capital of Greece")) return "Athens";
+    if (message.includes("capital of Grenada")) return "St. George's";
+    if (message.includes("capital of Guatemala")) return "Guatemala City";
+    if (message.includes("capital of Guinea")) return "Conakry";
+    if (message.includes("capital of Guinea-Bissau")) return "Bissau";
+    if (message.includes("capital of Guyana")) return "Georgetown";
+    if (message.includes("capital of Haiti")) return "Port-au-Prince";
+    if (message.includes("capital of Honduras")) return "Tegucigalpa";
+    if (message.includes("capital of Hungary")) return "Budapest";
+    if (message.includes("capital of Iceland")) return "Reykjavik";
+    if (message.includes("capital of India")) return "New Delhi";
+    if (message.includes("capital of Indonesia")) return "Jakarta";
+    if (message.includes("capital of Iran")) return "Tehran";
+    if (message.includes("capital of Iraq")) return "Baghdad";
+    if (message.includes("capital of Ireland")) return "Dublin";
+    if (message.includes("capital of Israel")) return "Jerusalem";
+    if (message.includes("capital of Italy")) return "Rome";
+    if (message.includes("capital of Ivory Coast")) return "Yamoussoukro";
+    if (message.includes("capital of Jamaica")) return "Kingston";
+    if (message.includes("capital of Japan")) return "Tokyo";
+    if (message.includes("capital of Jordan")) return "Amman";
+    if (message.includes("capital of Kazakhstan")) return "Nur-Sultan";
+    if (message.includes("capital of Kenya")) return "Nairobi";
+    if (message.includes("capital of Kiribati")) return "Tarawa";
+    if (message.includes("capital of Korea, North")) return "Pyongyang";
+    if (message.includes("capital of Korea, South")) return "Seoul";
+    if (message.includes("capital of Kosovo")) return "Pristina";
+    if (message.includes("capital of Kuwait")) return "Kuwait City";
+    if (message.includes("capital of Kyrgyzstan")) return "Bishkek";
+    if (message.includes("capital of Laos")) return "Vientiane";
+    if (message.includes("capital of Latvia")) return "Riga";
+    if (message.includes("capital of Lebanon")) return "Beirut";
+    if (message.includes("capital of Lesotho")) return "Maseru";
+    if (message.includes("capital of Liberia")) return "Monrovia";
+    if (message.includes("capital of Libya")) return "Tripoli";
+    if (message.includes("capital of Liechtenstein")) return "Vaduz";
+    if (message.includes("capital of Lithuania")) return "Vilnius";
+    if (message.includes("capital of Luxembourg")) return "Luxembourg City";
+    if (message.includes("capital of Madagascar")) return "Antananarivo";
+    if (message.includes("capital of Malawi")) return "Lilongwe";
+    if (message.includes("capital of Malaysia")) return "Kuala Lumpur";
+    if (message.includes("capital of Maldives")) return "Malé";
+    if (message.includes("capital of Mali")) return "Bamako";
+    if (message.includes("capital of Malta")) return "Valletta";
+    if (message.includes("capital of Marshall Islands")) return "Majuro";
+    if (message.includes("capital of Mauritania")) return "Nouakchott";
+    if (message.includes("capital of Mauritius")) return "Port Louis";
+    if (message.includes("capital of Mexico")) return "Mexico City";
+    if (message.includes("capital of Micronesia")) return "Palikir";
+    if (message.includes("capital of Moldova")) return "Chișinău";
+    if (message.includes("capital of Monaco")) return "Monaco";
+    if (message.includes("capital of Mongolia")) return "Ulaanbaatar";
+    if (message.includes("capital of Montenegro")) return "Podgorica";
+    if (message.includes("capital of Morocco")) return "Rabat";
+    if (message.includes("capital of Mozambique")) return "Maputo";
+    if (message.includes("capital of Myanmar")) return "Naypyidaw";
+    if (message.includes("capital of Namibia")) return "Windhoek";
+    if (message.includes("capital of Nauru")) return "Yaren District";
+    if (message.includes("capital of Nepal")) return "Kathmandu";
+    if (message.includes("capital of Netherlands")) return "Amsterdam";
+    if (message.includes("capital of New Zealand")) return "Wellington";
+    if (message.includes("capital of Nicaragua")) return "Managua";
+    if (message.includes("capital of Niger")) return "Niamey";
+    if (message.includes("capital of Nigeria")) return "Abuja";
+    if (message.includes("capital of North Macedonia")) return "Skopje";
+    if (message.includes("capital of Norway")) return "Oslo";
+    if (message.includes("capital of Oman")) return "Muscat";
+    if (message.includes("capital of Pakistan")) return "Islamabad";
+    if (message.includes("capital of Palau")) return "Ngerulmud";
+    if (message.includes("capital of Panama")) return "Panama City";
+    if (message.includes("capital of Papua New Guinea")) return "Port Moresby";
+    if (message.includes("capital of Paraguay")) return "Asunción";
+    if (message.includes("capital of Peru")) return "Lima";
+    if (message.includes("capital of Philippines")) return "Manila";
+    if (message.includes("capital of Poland")) return "Warsaw";
+    if (message.includes("capital of Portugal")) return "Lisbon";
+    if (message.includes("capital of Qatar")) return "Doha";
+    if (message.includes("capital of Romania")) return "Bucharest";
+    if (message.includes("capital of Russia")) return "Moscow";
+    if (message.includes("capital of Rwanda")) return "Kigali";
+    if (message.includes("capital of Saint Kitts and Nevis")) return "Basseterre";
+    if (message.includes("capital of Saint Lucia")) return "Castries";
+    if (message.includes("capital of Saint Vincent and the Grenadines")) return "Kingstown";
+    if (message.includes("capital of Samoa")) return "Apia";
+    if (message.includes("capital of San Marino")) return "San Marino";
+    if (message.includes("capital of Sao Tome and Principe")) return "São Tomé";
+    if (message.includes("capital of Saudi Arabia")) return "Riyadh";
+    if (message.includes("capital of Senegal")) return "Dakar";
+    if (message.includes("capital of Serbia")) return "Belgrade";
+    if (message.includes("capital of Seychelles")) return "Victoria";
+    if (message.includes("capital of Sierra Leone")) return "Freetown";
+    if (message.includes("capital of Singapore")) return "Singapore";
+    if (message.includes("capital of Slovakia")) return "Bratislava";
+    if (message.includes("capital of Slovenia")) return "Ljubljana";
+    if (message.includes("capital of Solomon Islands")) return "Honiara";
+    if (message.includes("capital of Somalia")) return "Mogadishu";
+    if (message.includes("capital of South Africa")) return "Pretoria (administrative), Bloemfontein (judicial), Cape Town (legislative)";
+    if (message.includes("capital of South Sudan")) return "Juba";
+    if (message.includes("capital of Spain")) return "Madrid";
+    if (message.includes("capital of Sri Lanka")) return "Sri Jayawardenepura Kotte (official), Colombo (commercial)";
+    if (message.includes("capital of Sudan")) return "Khartoum";
+    if (message.includes("capital of Suriname")) return "Paramaribo";
+    if (message.includes("capital of Sweden")) return "Stockholm";
+    if (message.includes("capital of Switzerland")) return "Bern";
+    if (message.includes("capital of Syria")) return "Damascus";
+    if (message.includes("capital of Taiwan")) return "Taipei";
+    if (message.includes("capital of Tajikistan")) return "Dushanbe";
+    if (message.includes("capital of Tanzania")) return "Dodoma";
+    if (message.includes("capital of Thailand")) return "Bangkok";
+    if (message.includes("capital of Togo")) return "Lomé";
+    if (message.includes("capital of Tonga")) return "Nuku'alofa";
+    if (message.includes("capital of Trinidad and Tobago")) return "Port of Spain";
+    if (message.includes("capital of Tunisia")) return "Tunis";
+    if (message.includes("capital of Turkey")) return "Ankara";
+    if (message.includes("capital of Turkmenistan")) return "Ashgabat";
+    if (message.includes("capital of Tuvalu")) return "Funafuti";
+    if (message.includes("capital of Uganda")) return "Kampala";
+    if (message.includes("capital of Ukraine")) return "Kyiv";
+    if (message.includes("capital of United Arab Emirates")) return "Abu Dhabi";
+    if (message.includes("capital of United Kingdom")) return "London";
+    if (message.includes("capital of United States")) return "Washington, D.C.";
+    if (message.includes("capital of Uruguay")) return "Montevideo";
+    if (message.includes("capital of Uzbekistan")) return "Tashkent";
+    if (message.includes("capital of Vanuatu")) return "Port Vila";
+    if (message.includes("capital of Vatican City")) return "Vatican City";
+    if (message.includes("capital of Venezuela")) return "Caracas";
+    if (message.includes("capital of Vietnam")) return "Hanoi";
+    if (message.includes("capital of Yemen")) return "Sana'a";
+    if (message.includes("capital of Zambia")) return "Lusaka";
+    if (message.includes("capital of Zimbabwe")) return "Harare";         
+        return evaluateMath(message) || "I'm here to help! Please ask a question.";
+    }
+
+    // Function to evaluate math expressions
+    function evaluateMath(message) {
+        try {
+            const expression = message.replace(/[^-()\d/*+.]/g, ''); // Only allow certain characters
+            const result = eval(expression);
+            return `The answer is ${result}`;
+        } catch (error) {
+            return null; // Return null if an error occurs
+        }
+    }
+
+    // Function to generate a story
+    function generateStory(message) {
+        const topic = message.split("story on ")[1] || "a random adventure";
+        return `Once upon a time, in a land filled with magic and wonder, there was a brave hero named Alex. One day, Alex set out on a quest to discover the secrets of ${topic}. Along the journey, Alex encountered mythical creatures, solved ancient riddles, and made friends with a wise old wizard. Through trials and tribulations, Alex learned the value of courage and friendship, ultimately returning home with not just stories, but a heart full of wisdom and adventure. The end!`;
+    }
+
+    // Function to generate an essay
+    function generateEssay(message) {
+        const topic = message.split("essay on ")[1] || "the importance of learning";
+        return `An essay on ${topic} would highlight the crucial role that education plays in personal and societal development. Learning equips individuals with knowledge and skills essential for navigating the complexities of life. It fosters critical thinking, creativity, and the ability to adapt to changing circumstances. In today’s fast-paced world, continuous learning is necessary for professional success and personal growth. Moreover, education promotes understanding and tolerance among diverse cultures, making it foundational for peace and cooperation in society. Thus, investing in education is vital for building a prosperous future for all.`;
+    }
+
+    // Function to calculate square root
+    function calculateSquareRoot(message) {
+        const number = parseFloat(message.split("square root of ")[1]);
+        if (isNaN(number)) return "Please provide a valid number.";
+        const squareRoot = Math.sqrt(number);
+        return `The square root of ${number} is ${squareRoot}.`;
+    }
+// Function to tell a joke
+function tellJoke() {
+    const jokes = [
+        "Why don't scientists trust atoms? Because they make up everything!",
+        "Why did the scarecrow win an award? Because he was outstanding in his field!",
+        "I told my wife she was drawing her eyebrows too high. She looked surprised!",
+        "What do you call fake spaghetti? An impasta!",
+        "Why do seagulls fly over the ocean? Because if they flew over the bay, they’d be bagels!",
+        "Why did the bicycle fall over? Because it was two-tired!",
+        "What did one ocean say to the other ocean? Nothing, they just waved!",
+        "Why don’t skeletons fight each other? They don’t have the guts."
+    ];
+    
+    // Generate a random index to select a joke
+    const randomIndex = Math.floor(Math.random() * jokes.length);
+    return jokes[randomIndex];
+}
+
+    // Function for text-to-speech
+    function speakText(text) {
+        var msg = new SpeechSynthesisUtterance(text);
+        window.speechSynthesis.speak(msg);
+    }
+
+    // Function to get the current time in Muscat
+    function getMuscatTime() {
+        const now = new Date();
+        const utcOffset = now.getTimezoneOffset() * 60000; // Offset in milliseconds
+        const muscatOffset = 4 * 60 * 60000; // Muscat is UTC+4
+        const muscatTime = new Date(now.getTime() + utcOffset + muscatOffset);
+
+        const hours = muscatTime.getHours();
+        const minutes = muscatTime.getMinutes().toString().padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        const muscatHours = hours % 12 || 12; // Convert to 12-hour format
+
+        return `The current time in Muscat is ${muscatHours}:${minutes} ${ampm}.`;
+    }
+</script>
+
+</body>
+</html>
